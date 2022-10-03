@@ -1,0 +1,119 @@
+﻿@using LibraryProject.Models
+@model AccountViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Düzenle";
+}
+@Html.ValidationSummary()
+
+<script>
+    function Cancel() {
+        location.href = '@Url.Action("Index","MyProfile")';
+    }
+</script>
+
+
+
+<!--begin::Portlet-->
+<div class="kt-portlet">
+
+
+    <!--begin::Form-->
+
+    @using (Html.BeginForm("edit", "MyProfile", FormMethod.Post, new { @class = "kt-form kt-form--label-right", role = "form" }))
+    {
+        <div class="kt-portlet__body">
+
+            @Html.HiddenFor(x => x.Id)
+
+            <div class="fc-body">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "Lütfen Hatalarınızı Gideriniz!", new { @class = "alert alert-warning" })
+
+                <div class="form-group row">
+                    @Html.LabelFor(m => m.IsimSoyisim, new { @class = "col-4 col-form-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.IsimSoyisim, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.IsimSoyisim, "", new { @class = "form-text text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(m => m.EMail, new { @class = "col-4 col-form-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.EMail, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.EMail, "", new { @class = "form-text text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(m => m.KullaniciAdi, new { @class = "col-4 col-form-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.KullaniciAdi, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.KullaniciAdi, "", new { @class = "form-text text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(m => m.Sifre, new { @class = "col-4 col-form-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Sifre, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Sifre, "", new { @class = "form-text text-danger" })
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <div class="kt-portlet__foot">
+            <div class="kt-form__actions">
+                <input type="submit" class="btn btn-success" value="Kaydet" />
+                <input type="button" onclick="Cancel()" class="btn btn-danger" style="background-color: #f54242; border-color: #f54242; color:#ffffff;" value="İptal" />
+            </div>
+        </div>
+
+    }
+    <!--end::Form-->
+</div>
+
+
+@section scripts{
+
+    <script>
+
+    var success = '@TempData["succes"]';
+
+    // self executing function here
+    (function () {
+
+
+
+
+
+        if (success) {
+
+
+
+            swal.fire({
+                title: 'Tamamlandı!',
+                text: 'Kaydınız Başarılı Şekilde Güncellendi!',
+                type: 'success',
+                showConfirmButton: false,
+                timer: 1500,
+                onOpen: function () {
+                    swal.showLoading()
+                }
+            })
+
+        }
+
+
+
+    })();
+    </script>
+
+
+
+
+}
+

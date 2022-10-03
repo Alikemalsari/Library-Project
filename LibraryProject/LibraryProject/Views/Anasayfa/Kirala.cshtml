@@ -1,0 +1,86 @@
+﻿@using LibraryProject.Models
+@model  KitaplarViewModel
+
+
+@Html.ValidationSummary()
+
+<script>
+    function Cancel() {
+        location.href = '@Url.Action("Index","Anasayfa")';
+    }
+</script>
+
+
+
+<!--begin::Portlet-->
+<div class="kt-portlet">
+
+
+
+
+
+    <!--begin::Form-->
+
+    @using (Html.BeginForm("Kirala", "Anasayfa", FormMethod.Post, new { @class = "kt-form ", role = "form" }))
+    {
+        
+            <div class="kt-portlet__body">
+
+                @Html.HiddenFor(x => x.KitapId)
+
+                <div class="fc-body">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "Lütfen Hatalarınızı Gideriniz!", new { @class = "alert alert-warning" })
+
+                    <div class="form-group row">
+                        @Html.LabelFor(m => m.KitapAdi, new { @disabled = "disabled" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.KitapAdi, new { @disabled = "disabled" })
+                            @Html.ValidationMessageFor(m => m.KitapAdi, "", new { @class = "form-text text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(m => m.Yazari, new { @disabled = "disabled" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Yazari, new { @disabled = "disabled" })
+                            @Html.ValidationMessageFor(m => m.Yazari, "", new { @class = "form-text text-danger" })
+                        </div>
+                    </div>
+                    <label>İsim-Soyisim</label>
+                    <br />
+                    <input type="text" name="KitabiAlan" placeholder="İsim-Soyisim" required />
+                    <br />
+                    <br />
+                    <label>Teslim Tarihi</label>
+                    <br />
+                    <input type="datetime-local" name="IadeZamani" placeholder="İade Zamanı" required />
+                    <br />
+                    <br />
+
+
+                </div>
+
+
+
+            </div>
+       
+            <div class="kt-portlet__foot">
+                <div class="kt-form__actions">
+                    <input type="submit" class="btn btn-success" value="Kaydet" />
+                    <input type="button" onclick="Cancel()" class="btn btn-danger" style="background-color: #f54242; border-color: #f54242; color:#ffffff;" value="İptal" />
+                </div>
+            </div>
+
+        }
+    <!--end::Form-->
+</div>
+
+
+
+
+
+
+
+
+

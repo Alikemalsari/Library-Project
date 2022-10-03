@@ -1,0 +1,68 @@
+﻿@using LibraryProject.Models
+@model KitaplarViewModel
+@{
+    ViewBag.Title = "YeniKitap";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<script>
+    function Cancel() {
+        location.href = '@Url.Action("Index","Admin")';
+    }
+</script>
+
+
+
+<!--begin::Portlet-->
+<div class="kt-portlet">
+
+
+    <!--begin::Form-->
+
+    @using (Html.BeginForm("YeniKitap", "Admin", FormMethod.Post, new { @class = "kt-form kt-form--label-right", role = "form" }))
+    {
+        <div class="kt-portlet__body">
+
+            
+
+            <div class="fc-body">              
+                <div class="form-group row">
+                    @Html.LabelFor(m => m.KitapAdi, new { @class = "col-4 col-form-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.KitapAdi, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.KitapAdi, "", new { @class = "form-text text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(m => m.Yazari, new { @class = "col-4 col-form-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Yazari, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Yazari, "", new { @class = "form-text text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(m => m.KitapStatus, new { @class = "col-4 col-form-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.KitapStatus, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.KitapStatus, "", new { @class = "form-text text-danger" })
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <div class="kt-portlet__foot">
+            <div class="kt-form__actions">
+                <input type="submit" class="btn btn-success" value="Kaydet" />
+                <input type="button" onclick="Cancel()" class="btn btn-danger" style="background-color: #f54242; border-color: #f54242; color:#ffffff;" value="İptal" />
+            </div>
+        </div>
+
+    }
+    <!--end::Form-->
+</div>
+
+

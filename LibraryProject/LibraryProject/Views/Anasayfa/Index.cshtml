@@ -1,0 +1,71 @@
+﻿@*@model IEnumerable<LibraryProject.Models.Kitaplar>*@
+@model  PagedList.IPagedList<LibraryProject.Models.Kitaplar>
+    @using PagedList
+@using PagedList.Mvc
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <style>
+        body {
+            padding: 20px 20px;
+        }
+
+        .results tr[visible='false'],
+        .no-result {
+            display: none;
+        }
+
+        .results tr[visible='true'] {
+            display: table-row;
+        }
+
+        .counter {
+            padding: 8px;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <table class="table table-hover table-bordered results" style="font-size:25px">
+        <thead>
+            <tr>
+
+
+                <th class="col-md-4 col-xs-4" style="font-weight:bold">Kitap Adı</th>
+                <th class="col-md-3 col-xs-3" style="font-weight:bold">Yazar</th>
+                <th scope="col" style="width: 25%;"></th>
+            </tr>          
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.KitapAdi</td>
+                    <td>@item.Yazari</td>
+                    <td align="center">
+
+                        <a class="btn btn-primary" style="border-color: #f54242; " href="/Anasayfa/Kirala?Id=@item.KitapId">Kirala</a>
+                    </td>
+                </tr>
+            }
+
+
+
+        </tbody>
+    </table>
+    @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new {sayfa}))
+</body>
+</html>
+
+
+
+

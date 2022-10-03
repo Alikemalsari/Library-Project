@@ -1,0 +1,87 @@
+﻿@using LibraryProject.Models
+@model IEnumerable<LibraryProject.Models.Kitaplar>
+@{
+    ViewBag.Title = "deneme";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+
+    <div class="kt-portlet">
+
+        <div class="kt-portlet__body">
+            <table class="table table-bordered" style="width: 70%; text-align:center; font-weight:400; font-size:1.05rem; margin:auto;">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Kitap Adı</th>
+                        <th scope="col">Yazar</th>
+                        <th scope="col" style="width: 25%;">Edit</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.KitapAdi</th>
+                            <td>@item.Yazari</td>
+                            <td align="center">
+
+                                <a class="btn btn-warning btn-elevate btn-pill btn-elevate-air" style="color: #ffffff; background-color: #fbce44; border-color: #fbce44; " href="/Admin/Edit?Id=@item.KitapId"><i class="flaticon-edit">Düzenle</i></a>
+                                <a class="btn btn-danger" style="color: #ffffff; background-color: #f54242; border-color: #f54242; " onclick="sil(@item.KitapId)">Sil</a>
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+
+    function sil(id) {
+
+
+        $.ajax({
+            url: "/Admin/Delete?id=" + id,
+            type: "POST",
+            success: function (data) {
+                window.location.href = "@Url.Action("Index","Admin")";
+
+            }
+
+        });
+    }
+
+
+
+
+
+</script>
+
+
